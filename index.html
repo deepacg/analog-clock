@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <canvas id='canvas' width=400 height=400 style='background-color: burlywood'></canvas>
+    <canvas id='canvas' width=400 height=400 style='background-color: #ff9966'></canvas>
 
     <script>
         const canvas = document.getElementById('canvas')
@@ -27,16 +27,25 @@
         }
 
         function drawFace(ctx, radius){
-            
+            var grad
             ctx.beginPath()
             ctx.arc(0,0,radius,0,2*Math.PI)
-            ctx.fillStyle='lightyellow'
+            ctx.fillStyle='#ffff99'
             ctx.fill()
+
+            // 3D look
+            grad = ctx.createRadialGradient(0, 0 ,radius * 0.95, 0, 0, radius * 1.05);
+            grad.addColorStop(0, '#9966ff');
+            grad.addColorStop(0.5, 'white');
+            grad.addColorStop(1, '#800000');
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = radius*0.1;
+            ctx.stroke();
 
             // center dot
             ctx.beginPath()
             ctx.arc(0,0,radius*0.1,0,2*Math.PI)
-            ctx.fillStyle = 'blue'
+            ctx.fillStyle = '#cc6600'
             ctx.fill()
         }
 
@@ -46,7 +55,7 @@
             ctx.font = radius * 0.15 + "px arial"
             ctx.textBaseline = 'middle'
             ctx.textAlign = 'center'
-            ctx.fillStyle = 'brown'
+            ctx.fillStyle = '#660033'
             for(num = 1; num <13; num++){
                 ang = num * Math.PI/6
                 ctx.rotate(ang)
@@ -80,7 +89,7 @@
         }
 
         function drawHand(ctx, pos, length, width){
-            ctx.strokeStyle = 'gray'
+            ctx.strokeStyle = '#666633'
             ctx.beginPath()
             ctx.lineWidth = width
             ctx.lineCap = 'round'
